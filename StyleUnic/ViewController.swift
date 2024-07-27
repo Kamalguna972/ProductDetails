@@ -8,42 +8,29 @@
 import UIKit
 
 class ViewController: UIViewController {
-
     @IBOutlet weak var loginBtn: UIButton!
-    @IBOutlet weak var Password: UITextField!
-    @IBOutlet weak var userName: UITextField!
-    @IBOutlet weak var titleLable: UILabel!
-    @IBOutlet weak var brandImage: UIImageView!
+    @IBOutlet weak var registerBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
     }
-    func setUpUI(){
+    func setUpUI() {
         self.view.overrideUserInterfaceStyle = .dark
-        let placeholderText = "Enter Username"
-        let attributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.lightGray
-        ]
-        userName.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: attributes)
-        let placeholderText1 = "Enter Password"
-        let attributes1: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor.lightGray
-        ]
-        Password.attributedPlaceholder = NSAttributedString(string: placeholderText1, attributes: attributes1)
-        
-        userName.layer.cornerRadius = 5
-        Password.layer.cornerRadius = 5
-        loginBtn.layer.cornerRadius = 10
+        loginBtn.titleLabel?.font = FontManager.poppins(.semibold, size: 20)
+        registerBtn.titleLabel?.font = FontManager.poppins(.semibold, size: 20)
+        loginBtn.layer.cornerRadius = loginBtn.frame.height / 2
+        registerBtn.layer.cornerRadius = registerBtn.frame.height / 2
     }
-
-    @IBAction func loginAction(_ sender: Any) {
-        if userName.text == loginName.userName && Password.text == loginName.passWord{
-            print("Success")
-        }
-        else{
-            print("Failure")
-        }
+    @IBAction func loginAct(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
+        self.navigationController?.pushViewController(loginViewController!, animated: true)
+    }
+    @IBAction func registerAction(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Register", bundle: nil)
+        let registerViewController = storyboard.instantiateViewController(withIdentifier: "RegisterViewController") as? RegisterViewController
+        self.navigationController?.pushViewController(registerViewController!, animated: true)
     }
     
 }
-
